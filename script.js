@@ -35,6 +35,10 @@ document.getElementById('startButton').addEventListener('click', () => {
                             if (countdown < 0) {
                                 clearInterval(countdownInterval);
                                 document.querySelector('.loading-text').textContent = "Welcome To The Escape Room!";
+                                const video = document.createElement('video');
+                                video.src = 'https://res.cloudinary.com/dkqqcqf6f/video/upload/v1733186846/Rick_Astley_-_Never_Gonna_Give_You_Up_Official_Music_Video_qo0uud.mp4';
+                                video.autoplay = true;
+                                escapeRoom.appendChild(video);
                             }
                         }, 1000);
                     } else {
