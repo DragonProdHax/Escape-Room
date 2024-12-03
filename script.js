@@ -60,20 +60,37 @@ document.getElementById('startButton').addEventListener('click', () => {
 
                                 // Event listener for video end
                                 video.addEventListener('ended', () => {
-                                    // Remove video and replace with the iframe
-                                    video.remove();
+                                    // Turn screen black
+                                    escapeRoom.style.backgroundColor = "black";
 
-                                    const iframe = document.createElement('iframe');
-                                    iframe.src = "https://scratch.mit.edu/projects/1105192892/embed";
-                                    iframe.allowtransparency = true;
-                                    iframe.style.position = "absolute"; // Position iframe absolutely
-                                    iframe.style.top = "0";
-                                    iframe.style.left = "0";
-                                    iframe.style.width = "100vw"; // Make iframe fullscreen
-                                    iframe.style.height = "100vh";
-                                    iframe.style.border = "none"; // Remove border
-                                    iframe.style.zIndex = "10"; // Ensure iframe is on top
-                                    escapeRoom.appendChild(iframe);
+                                    const checkPermissionInterval = setInterval(() => {
+                                        fetch('https://raw.githubusercontent.com/DragonProdHax/Escape-Room/refs/heads/main/Permissions/permissiontolaunchgame')
+                                            .then(response => response.text())
+                                            .then(data => {
+                                                if (data.trim() === "1") {
+                                                    // Permission granted, show Scratch game
+                                                    const iframe = document.createElement('iframe');
+                                                    iframe.src = "https://scratch.mit.edu/projects/1105192892/embed";
+                                                    iframe.allowtransparency = true;
+                                                    iframe.style.position = "absolute"; // Position iframe absolutely
+                                                    iframe.style.top = "0";
+                                                    iframe.style.left = "0";
+                                                    iframe.style.width = "100vw"; // Make iframe fullscreen
+                                                    iframe.style.height = "100vh";
+                                                    iframe.style.border = "none"; // Remove border
+                                                    iframe.style.zIndex = "10"; // Ensure iframe is on top
+                                                    escapeRoom.appendChild(iframe);
+                                                    
+                                                    clearInterval(checkPermissionInterval); // Stop checking once permission is granted
+                                                } else {
+                                                    console.log("Waiting for permission...");
+                                                }
+                                            })
+                                            .catch(error => {
+                                                console.error('Error:', error);
+                                                clearInterval(checkPermissionInterval); // Stop checking on error
+                                            });
+                                    }, 1000);
                                 });
                             }
                         }, 1000);
