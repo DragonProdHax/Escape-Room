@@ -39,6 +39,16 @@ document.getElementById('startButton').addEventListener('click', () => {
                                 video.src = 'https://res.cloudinary.com/dkqqcqf6f/video/upload/v1733186846/Rick_Astley_-_Never_Gonna_Give_You_Up_Official_Music_Video_qo0uud.mp4';
                                 video.autoplay = true;
                                 escapeRoom.appendChild(video);
+                                
+                                document.addEventListener('keydown', (event) => {
+                                    if (event.key.toLowerCase() === 'p') {
+                                        if (video.paused) {
+                                            video.play();
+                                        } else {
+                                            video.pause();
+                                        }
+                                    }
+                                });
                             }
                         }, 1000);
                     } else {
