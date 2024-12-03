@@ -9,7 +9,7 @@ document.getElementById('startButton').addEventListener('click', () => {
     // Simulate loading screen
     let loadingStates = [
         "Waiting For Permission To Start....",
-        "Take Your Seat So We Can Begin!",
+        "Take Your Seat So We Can Begin. And Turn Up Your Audio For The Best Experience!",
         "Waiting For Staff To Press Start",
     ];
     let currentState = 0;
@@ -23,8 +23,20 @@ document.getElementById('startButton').addEventListener('click', () => {
                 .then(response => response.text())
                 .then(data => {
                     if (data.trim() === "1") {
-                        document.querySelector('.loading-text').textContent = "Escape Room Loaded!";
+                        let countdown = 10;
+                        const audio = new Audio('https://res.cloudinary.com/dkqqcqf6f/video/upload/v1733186350/TunePocket-Countdown-Timer-10-Sec-Robot-Vocoder-1-Preview_cgccrt.mp3');
+                        audio.play();
                         clearInterval(loadingInterval);
+                        
+                        const countdownInterval = setInterval(() => {
+                            document.querySelector('.loading-text').textContent = `Starting in ${countdown}`;
+                            countdown--;
+                            
+                            if (countdown < 0) {
+                                clearInterval(countdownInterval);
+                                document.querySelector('.loading-text').textContent = "Welcome To The Escape Room!";
+                            }
+                        }, 1000);
                     } else {
                         currentState = 0;
                     }
