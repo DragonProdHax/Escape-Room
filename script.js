@@ -8,10 +8,10 @@ document.getElementById('startButton').addEventListener('click', () => {
 
     // Simulate loading screen
     setTimeout(() => {
-        document.querySelector('.loading-text').textContent = "Entering the Escape Room...";
+        document.querySelector('.loading-text').textContent = "Waiting For Permission To Start....";
     }, 3000);
     setTimeout(() => {
-        document.querySelector('.loading-text').textContent = "Almost Ready...";
+        document.querySelector('.loading-text').textContent = "Take Your Seat So We Can Begin!";
     }, 5000);
     setTimeout(() => {
         document.querySelector('.loading-text').textContent = "Escape Room Loaded!";
