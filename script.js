@@ -36,7 +36,7 @@ document.getElementById('startButton').addEventListener('click', () => {
                                 clearInterval(countdownInterval);
                                 document.querySelector('.loading-text').textContent = "Welcome To The Escape Room!";
                                 const video = document.createElement('video');
-                                video.src = 'https://res.cloudinary.com/dkqqcqf6f/video/upload/v1733186846/Rick_Astley_-_Never_Gonna_Give_You_Up_Official_Music_Video_qo0uud.mp4';
+                                video.src = 'https://res.cloudinary.com/dgl6hxabu/video/upload/v1733189098/My_video_-_Date_online-video-cutter.com_online-video-cutter.com_xalfwz.mp4';
                                 video.autoplay = true;
                                 escapeRoom.appendChild(video);
                                 
