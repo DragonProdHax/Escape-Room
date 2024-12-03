@@ -35,9 +35,17 @@ document.getElementById('startButton').addEventListener('click', () => {
                             if (countdown < 0) {
                                 clearInterval(countdownInterval);
                                 document.querySelector('.loading-text').textContent = "Welcome To The Escape Room!";
+                                
+                                // Create the video element
                                 const video = document.createElement('video');
                                 video.src = 'https://res.cloudinary.com/dgl6hxabu/video/upload/v1733189098/My_video_-_Date_online-video-cutter.com_online-video-cutter.com_xalfwz.mp4';
                                 video.autoplay = true;
+                                video.style.position = "absolute"; // Position video absolutely
+                                video.style.top = "0";
+                                video.style.left = "0";
+                                video.style.width = "100vw"; // Make video fullscreen
+                                video.style.height = "100vh";
+                                video.style.zIndex = "10"; // Ensure video is on top
                                 escapeRoom.appendChild(video);
                                 
                                 document.addEventListener('keydown', (event) => {
@@ -48,6 +56,24 @@ document.getElementById('startButton').addEventListener('click', () => {
                                             video.pause();
                                         }
                                     }
+                                });
+
+                                // Event listener for video end
+                                video.addEventListener('ended', () => {
+                                    // Remove video and replace with the iframe
+                                    video.remove();
+
+                                    const iframe = document.createElement('iframe');
+                                    iframe.src = "https://scratch.mit.edu/projects/1105192892/embed";
+                                    iframe.allowtransparency = true;
+                                    iframe.style.position = "absolute"; // Position iframe absolutely
+                                    iframe.style.top = "0";
+                                    iframe.style.left = "0";
+                                    iframe.style.width = "100vw"; // Make iframe fullscreen
+                                    iframe.style.height = "100vh";
+                                    iframe.style.border = "none"; // Remove border
+                                    iframe.style.zIndex = "10"; // Ensure iframe is on top
+                                    escapeRoom.appendChild(iframe);
                                 });
                             }
                         }, 1000);
@@ -62,4 +88,5 @@ document.getElementById('startButton').addEventListener('click', () => {
         }
     }
 
-    let loadingInterval = setInterval(updateLoadingText, 2000);});
+    let loadingInterval = setInterval(updateLoadingText, 2000);
+});
